@@ -1,0 +1,91 @@
+PImage fragmentcow;
+PImage fragmentnocow;
+int randcow;
+int randnocow;
+PFont font1, font2;
+
+
+void setup() {
+ //size(1080, 720);
+ //size(displayWidth,displayHeight);
+ fullScreen();
+ background(0);
+ //font1 = loadFont("WilhelmKlingsporGotisch-48.vlw");
+// font2 = loadFont("GillSans-Bold-48.vlw");
+ font1 = loadFont("WilhelmKlingsporGotisch-48.vlw");
+ font2 = loadFont("WilhelmKlingsporGotisch-48.vlw");
+ 
+ randcow = int(random(0,9)); 
+ takerandomimage("frag_" + nf(randcow, 3) + ".jpg"); 
+ randnocow = int(random(0,4));
+ takerandomimage2("nocow_" + nf(randnocow, 3) + ".jpg");
+ 
+
+ 
+//fill(255);
+//textFont (font2,100);
+//text("Cow", (width/4)-100, height/2); 
+//text("No Cow", (width*0.75)-250, height/2); 
+
+initializeSketch();
+}
+
+
+void takerandomimage(String fn) {
+fragmentcow = loadImage(fn); 
+}
+
+void takerandomimage2(String fn) {
+fragmentnocow = loadImage(fn); 
+}
+
+
+void initializeSketch() {
+  fill(0);
+  rect(0,0,width,height);
+  fill(255);
+  textFont (font2,100);
+ // textAlign(CENTER);
+ text("Cow", (width/4)-75, height/2); 
+ text("No Cow", (width*0.75)-200, height/2); 
+  
+}
+
+void draw(){
+  initializeSketch();
+ 
+  if ((mousePressed == true) && (mouseX < width/2)) {
+  image(fragmentcow,0,0,width,height);
+  saveFrame("screen-####.jpg");
+  fill(0);
+  rect(0,0,width,height);
+  fill(255);
+  text("...",(width/2)-50,height/2); 
+  //text("cow it is !",width/2,height/2); 
+  println("cow it is!.");
+  noLoop();
+  }
+  if ((mousePressed == true) && (mouseX > width/2)) {
+  image(fragmentnocow,0,0,width,height);
+  saveFrame("screen-####.jpg");
+  fill(0);
+  rect(0,0,width,height);
+  fill(255);
+  text("...",(width/2)-50,height/2); 
+  println("no cow.");
+  noLoop();
+  }
+}
+
+
+void keyPressed(){
+  if(keyCode == 32){
+      loop();
+  fill(0);
+  rect(0,0,width,height);
+  //fill(255);
+  println("restart.");
+  initializeSketch();
+  loop();
+  }
+}
